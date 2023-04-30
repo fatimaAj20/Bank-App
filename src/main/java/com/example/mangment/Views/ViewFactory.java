@@ -5,9 +5,14 @@ import com.example.mangment.Controllers.Client.ClientController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 public class ViewFactory {
 
@@ -130,6 +135,26 @@ public class ViewFactory {
 
     public AccountType getLoggedInAccountType() {
         return LoggedInAccountType;
+    }
+
+    public void showMessageWindow(String senderPAddress, String messageText)
+    {
+        StackPane pane = new StackPane();
+        Label sender = new Label(senderPAddress);
+        Label message = new Label(messageText);
+        VBox vbox = new VBox(5);
+        vbox.setAlignment(Pos.CENTER);
+        pane.getChildren().add(vbox);
+
+        vbox.getChildren().addAll(sender, message);
+        Scene scene = new Scene(pane,300,180);
+        Stage stage = new Stage();
+        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/bankIcon.png"))));
+        stage.setResizable(false);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Message");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void setLoggedInAccountType(AccountType loggedInAccountType) {
