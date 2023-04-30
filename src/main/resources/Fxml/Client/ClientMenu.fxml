@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="180.0" styleClass="main_menu_container" stylesheets="@../../Styles/ClientMenu.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mangment.Controller.Client.ClientMenuController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="180.0" styleClass="main_menu_container" stylesheets="@../../Styles/ClientMenu.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mangment.Controllers.Client.ClientMenuController">
    <AnchorPane prefHeight="730.0" prefWidth="160.0" styleClass="Left_container">
       <VBox prefHeight="120.0" prefWidth="130.0" styleClass="report_container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <FontAwesomeIconView strokeType="OUTSIDE" strokeWidth="0.0" text="Report Suggestion / Bugs?" />
@@ -36,7 +36,7 @@
                <FontAwesomeIconView glyphName="HANDSHAKE_ALT" size="20" strokeType="OUTSIDE" strokeWidth="0.0" />
             </graphic>
          </Button>
-         <Button fx:id="acounts_btn" mnemonicParsing="false" text="Accounts">
+         <Button fx:id="accounts_btn" mnemonicParsing="false" text="Accounts">
             <graphic>
                <FontAwesomeIconView glyphName="ADDRESS_BOOK_ALT" size="20" strokeType="OUTSIDE" strokeWidth="0.0" />
             </graphic>

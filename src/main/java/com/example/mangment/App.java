@@ -1,0 +1,19 @@
+package com.example.mangment;
+
+import com.example.mangment.Models.Model;
+import com.example.mangment.Views.ViewFactory;
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+
+public class App extends Application {
+    @Override
+    public void start(Stage stage) {
+
+        Model.getInstance().getViewFactory().showLoginWindow();
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+}

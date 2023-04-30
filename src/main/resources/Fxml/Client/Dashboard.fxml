@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="dashboard" stylesheets="@../../Styles/Dashboard.css"
             xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.mangment.Controller.Client.DashboardController">
+            fx:controller="com.example.mangment.Controllers.Client.DashboardController">
    <FontAwesomeIconView strokeType="OUTSIDE" strokeWidth="0.0" styleClass="section_title" text="Accounts Summary"
                         AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="90.0"/>
    <FontAwesomeIconView fx:id="user_name" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="user_name" text="Hi user,"
