@@ -65,7 +65,7 @@ public class DashboardController implements Initializable {
         try{
             if(resultSet.isBeforeFirst())
             {
-                Model.getInstance().getDatabaseDriver().updateBalance(receiver, amount, "ADD");
+                Model.getInstance().getDatabaseDriver().updateBalance(receiver, amount, "ADD", "SavingsAccount");
             }
         }
         catch (Exception ex)
@@ -73,8 +73,8 @@ public class DashboardController implements Initializable {
             ex.printStackTrace();
         }
 
-        Model.getInstance().getDatabaseDriver().updateBalance(sender, amount, "SUB");
-        Model.getInstance().getClient().savingsAccountProperty().get().setBalance(Model.getInstance().getDatabaseDriver().getSavingsAccountBalance(sender));
+        Model.getInstance().getDatabaseDriver().updateBalance(sender, amount, "SUB", "SavingsAccount");
+        Model.getInstance().getClient().savingsAccountProperty().get().setBalance(Model.getInstance().getDatabaseDriver().getAccountBalance(sender, "SavingsAccount"));
         Model.getInstance().getDatabaseDriver().newTransaction(sender, receiver, amount, message);
         payee_fld.setText("");
         amount_fld.setText("");

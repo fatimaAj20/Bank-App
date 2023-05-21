@@ -1,7 +1,5 @@
 package com.example.mangment.Models;
 
-import javafx.stage.Stage;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -70,7 +68,7 @@ public class DatabaseDriver {
         Statement statement;
         try{
             statement = this.connection.createStatement();
-            statement.executeUpdate("INSERT INTO "+ " Client(FirstName, LastName, PayeeAddress, Password, Date) Values ('"+fname+"', '"+lname+"', '"+pAddress+"', '"+password+"', '"+date.toString()+"');");
+            statement.executeUpdate("INSERT INTO "+ " Clients(FirstName, LastName, PayeeAddress, Password, Date) Values ('"+fname+"', '"+lname+"', '"+pAddress+"', '"+password+"', '"+date.toString()+"');");
         }
         catch(Exception ex)
         {
@@ -96,7 +94,7 @@ public class DatabaseDriver {
         Statement statement;
         try{
             statement = this.connection.createStatement();
-            statement.executeUpdate("INSERT INTO "+ " SavingsAccounts (Owner, AccountNumber, WithrawalLimit, Balance) Values ('"+owner+"', '"+number+"', '"+wLimit+"', '"+balance+"');");
+            statement.executeUpdate("INSERT INTO "+ " SavingsAccounts (Owner, AccountNumber, WithdrawalLimit, Balance) Values ('"+owner+"', '"+number+"', '"+wLimit+"', '"+balance+"');");
         }
         catch(Exception ex)
         {
@@ -199,14 +197,18 @@ public class DatabaseDriver {
         return resultSet;
     }
 
-    public double getSavingsAccountBalance(String payeeAddress)
+    public double getAccountBalance(String payeeAddress, String accountType)
     {
         Statement statement;
         ResultSet resultSet = null;
         double balance = 0;
+        String tableName= "SavingsAccounts";
+        if(accountType.equals("CheckingAccount")){
+            tableName = "CheckingAccounts";
+        }
         try{
             statement = this.connection.createStatement();
-            resultSet = statement.executeQuery("SELECT * FROM SavingsAccounts WHERE Owner='"+payeeAddress+"';");
+            resultSet = statement.executeQuery("SELECT * FROM "+tableName+" WHERE Owner='"+payeeAddress+"';");
             balance = resultSet.getDouble("Balance");
         }
         catch (Exception ex)
@@ -217,24 +219,28 @@ public class DatabaseDriver {
         return balance;
     }
 
-    public void updateBalance(String payeeAddress, double amount, String operation)
+    public void updateBalance(String payeeAddress, double amount, String operation, String accountType)
     {
         Statement statement;
         ResultSet resultSet;
+        String tableName= "SavingsAccounts";
+        if(accountType.equals("CheckingAccount")){
+            tableName = "CheckingAccounts";
+        }
         try {
             statement = this.connection.createStatement();
 
-            resultSet = statement.executeQuery("SELECT * FROM SavingsAccounts WHERE Owner='"+payeeAddress+"';");
+            resultSet = statement.executeQuery("SELECT * FROM "+tableName+" WHERE Owner='"+payeeAddress+"';");
             double newBalance = 0;
             if(operation.equals("ADD"))
             {
                 newBalance  =resultSet.getDouble("Balance") + amount;
-                statement.executeUpdate("Update SavingsAccounts SET Balance =" + newBalance + " Where Owner ='" + payeeAddress + "';");
+                statement.executeUpdate("Update "+tableName+" SET Balance =" + newBalance + " Where Owner ='" + payeeAddress + "';");
             }
             else{
                 if(resultSet.getDouble("Balance") > amount) {
                     newBalance  =resultSet.getDouble("Balance") - amount;
-                    statement.executeUpdate("Update SavingsAccounts SET Balance =" + newBalance + " Where Owner ='" + payeeAddress + "';");
+                    statement.executeUpdate("Update "+tableName+" SET Balance =" + newBalance + " Where Owner ='" + payeeAddress + "';");
                 }
             }
         }
@@ -250,6 +256,11 @@ public class DatabaseDriver {
         try{
             statement = this.connection.createStatement();
             statement.executeUpdate("INSERT INTO "+ " Transactions (Sender, Receiver, Amount, Date, Message) Values ('"+sender+"', '"+receiver+"', '"+amount+"', '"+LocalDate.now().toString()+"', '"+message+"');");
+            Model.getInstance().getAllTransactions().removeAll();
+            Model.getInstance().setAllTransactions();
+            Model.getInstance().getLatestTransactions().removeAll();
+            Model.getInstance().setLatestTransactions();
+
         }
         catch(Exception ex)
         {
