@@ -1,5 +1,8 @@
 package com.example.mangment.Controllers;
 
+import com.example.mangment.Controllers.Login.AdminLoginStrategy;
+import com.example.mangment.Controllers.Login.ClientLoginStrategy;
+import com.example.mangment.Controllers.Login.LoginContext;
 import com.example.mangment.Models.Model;
 import com.example.mangment.Views.AccountType;
 import javafx.collections.FXCollections;
@@ -29,34 +32,22 @@ public class LoginController implements Initializable {
 
     private void onLogin(){
         Stage stage=(Stage)error_lbl.getScene().getWindow();
+        LoginContext context=new LoginContext();
 
         if(Model.getInstance().getViewFactory().getLoggedInAccountType() == AccountType.CLIENT)
         {
-            Model.getInstance().evaluateClientCred(payee_address_fld.getText(), password_fld.getText());
-            if( Model.getInstance().getClientLoginSuccessFlag())
-            {
-                Model.getInstance().getViewFactory().closeStage(stage);
-                Model.getInstance().getViewFactory().showClientWindow();
-            }
-            else{
-                payee_address_fld.setText("");
-                password_fld.setText("");
-                error_lbl.setText("No such login credentials exist");
-            }
+            //client
+            context.setStrategy(new ClientLoginStrategy());
+
         }
         else{
-            Model.getInstance().evaluateAdminCred(payee_address_fld.getText(), password_fld.getText());
-            if( Model.getInstance().getAdminLoginSuccessFlag())
-            {
-                Model.getInstance().getViewFactory().closeStage(stage);
-                Model.getInstance().getViewFactory().showAdminWindow();
-            }
-            else{
-                payee_address_fld.setText("");
-                password_fld.setText("");
-                error_lbl.setText("No such login credentials exist");
-            }
+            // admin
+            context.setStrategy(new AdminLoginStrategy());
+
+
         }
+        context.performLogin(payee_address_fld,password_fld,stage,error_lbl);
+
     }
 
     private void setAcc_selector()
