@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class ClientLoginStrategy implements LoginStrategy{
     @Override
     public void login(TextField username, TextField password, Stage stage, Label err_lbl) {
-        Model.getInstance().evaluateClientCred(username.getText(), username.getText());
+        Model.getInstance().evaluateClientCred(username.getText(), password.getText());
         if( Model.getInstance().getClientLoginSuccessFlag())
         {
             Model.getInstance().getViewFactory().closeStage(stage);
@@ -19,6 +19,5 @@ public class ClientLoginStrategy implements LoginStrategy{
             password.setText("");
             err_lbl.setText("No such login credentials exist");
         }
-
     }
 }

@@ -1,5 +1,6 @@
 package com.example.mangment.Controllers.Admin;
 
+import com.example.mangment.Models.Client;
 import com.example.mangment.Models.Model;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -73,6 +74,11 @@ public class CreateClientController implements Initializable {
         String lname = lname_fld.getText();
         String password = password_fld.getText();
         Model.getInstance().getDatabaseDriver().createClient(fname, lname, payeeAddress, password, LocalDate.now());
+
+        if(!Model.getInstance().getClients().isEmpty())
+        {
+            Model.getInstance().getClients().add(Model.getInstance().searchClient(payeeAddress).get(0));
+        }
         error_lbl.setStyle("-fx-text-fill: blue; -fx-font-size: 1.3em; -fx-font-weight: bold");
         error_lbl.setText("Client Created Successfully");
         emptyFields();
@@ -105,15 +111,15 @@ public class CreateClientController implements Initializable {
 
     private void createAccount(String accountType)
     {
-        double balance = Double.parseDouble(ch_amount_fld.getText());
         String accountNumber = Integer.toString((new Random()).nextInt(99999999)+10000000);
 
         if(accountType == "Checking")
         {
+            double balance = Double.parseDouble(ch_amount_fld.getText());
             Model.getInstance().getDatabaseDriver().createCheckingAccount(payeeAddress, accountNumber, 10, balance);
-
         }
         else{
+            double balance = Double.parseDouble(sv_account_fld.getText());
             Model.getInstance().getDatabaseDriver().createSavingsAccount(payeeAddress, accountNumber, 2000, balance);
         }
     }

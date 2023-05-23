@@ -5,7 +5,9 @@ import com.example.mangment.Views.ClientMenuOptions;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-
+import java.awt.Desktop;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,6 +28,7 @@ public class ClientMenuController implements Initializable {
         transaction_btn.setOnAction(actionEvent -> onTransactions());
         accounts_btn.setOnAction(actionEvent -> onAccounts());
         logout_btn.setOnAction(actionEvent -> onLogout());
+        report_btn.setOnAction(actionEvent -> onReport());
     }
 
     private void  onDashboard(){
@@ -44,5 +47,21 @@ public class ClientMenuController implements Initializable {
         Model.getInstance().getViewFactory().closeStage(stage);
         Model.getInstance().getViewFactory().showLoginWindow();
         Model.getInstance().setClientLoginSuccessFlag(false);
+    }
+
+    private void onReport()
+    {
+        try {
+        Desktop desktop;
+        if (Desktop.isDesktopSupported()
+                && (desktop = Desktop.getDesktop()).isSupported(Desktop.Action.MAIL)) {
+            URI mailto = new URI("mailto:GuiProjectAdmins@lu.edu.lb?subject=Gui%20Project%20Error");
+            desktop.mail(mailto);
+        } else {
+            throw new RuntimeException("desktop doesn't support mailto");
+        }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

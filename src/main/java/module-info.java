@@ -9,6 +9,7 @@ module com.example.mangment {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
+    requires java.desktop;
 
     opens com.example.mangment to javafx.fxml;
     exports com.example.mangment;

@@ -1,10 +1,10 @@
 package com.example.mangment.Controllers.Client;
 
 import com.example.mangment.Models.Client;
+import com.example.mangment.Models.Model;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -32,5 +32,13 @@ public class ClientCellController implements Initializable {
         ch_acc_lbl.textProperty().bind(client.checkingAccountProperty().asString());
         sv_acc_lbl.textProperty().bind(client.savingsAccountProperty().asString());
         date_lbl.textProperty().bind(client.dateCreatedProperty().asString());
+        delete_btn.setOnAction(actionEvent -> onDelete());
+    }
+
+    public void onDelete()
+    {
+        Model.getInstance().getDatabaseDriver().deleteClient(this.client.payeeAddressProperty().get());
+        Model.getInstance().getClients().clear();
+        Model.getInstance().setClients();
     }
 }

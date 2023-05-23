@@ -38,16 +38,12 @@ public class LoginController implements Initializable {
         {
             //client
             context.setStrategy(new ClientLoginStrategy());
-
         }
         else{
             // admin
             context.setStrategy(new AdminLoginStrategy());
-
-
         }
         context.performLogin(payee_address_fld,password_fld,stage,error_lbl);
-
     }
 
     private void setAcc_selector()

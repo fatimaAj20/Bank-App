@@ -76,9 +76,21 @@ public class DashboardController implements Initializable {
         Model.getInstance().getDatabaseDriver().updateBalance(sender, amount, "SUB", "SavingsAccount");
         Model.getInstance().getClient().savingsAccountProperty().get().setBalance(Model.getInstance().getDatabaseDriver().getAccountBalance(sender, "SavingsAccount"));
         Model.getInstance().getDatabaseDriver().newTransaction(sender, receiver, amount, message);
+        Model.getInstance().getLatestTransactions().add(0, new Transaction(sender, receiver, amount, LocalDate.now(), message));
+        if(Model.getInstance().getLatestTransactions().size() > 4)
+        {
+            Model.getInstance().getLatestTransactions().remove(4);
+        }
+
+        if(!Model.getInstance().getAllTransactions().isEmpty())
+        {
+            Model.getInstance().getAllTransactions().add(0, new Transaction(sender, receiver, amount, LocalDate.now(), message));
+        }
+
         payee_fld.setText("");
         amount_fld.setText("");
         message_fld.setText("");
+        accountsSummary();
     }
 
     private void accountsSummary() {

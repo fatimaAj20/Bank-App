@@ -82,7 +82,7 @@ public class Model {
                 String[] dateParts = resultSet.getString("Date").split("-");
                 checkingAccount = getCheckingAccountGivenPAddress(pAddress);
                 savingsAccount = getSavingsAccountGivenPAddress(pAddress);
-                this.client.dateCreatedProperty().set(LocalDate.of(Integer.parseInt( dateParts[0]), Integer.parseInt(dateParts[1]), Integer.parseInt(dateParts[1])));
+                this.client.dateCreatedProperty().set(LocalDate.of(Integer.parseInt( dateParts[0]), Integer.parseInt(dateParts[1]), Integer.parseInt(dateParts[2])));
                 this.client.checkingAccountProperty().set(checkingAccount);
                 this.client.savingsAccountProperty().set(savingsAccount);
                 this.clientLoginSuccessFlag = true;
@@ -128,7 +128,7 @@ public class Model {
                 String lname = resultSet.getString("LastName");
                 String pAddress = resultSet.getString("PayeeAddress");
                 String[] dateParts = resultSet.getString("Date").split("-");
-                LocalDate date = LocalDate.of(Integer.parseInt( dateParts[0]), Integer.parseInt(dateParts[1]), Integer.parseInt(dateParts[1]));
+                LocalDate date = LocalDate.of(Integer.parseInt( dateParts[0]), Integer.parseInt(dateParts[1]), Integer.parseInt(dateParts[2]));
                 checkingAccount= getCheckingAccountGivenPAddress(pAddress);
                 savingsAccount= getSavingsAccountGivenPAddress(pAddress);
                 clients.add(new Client(fname, lname, pAddress, checkingAccount, savingsAccount, date));
@@ -194,7 +194,7 @@ public class Model {
             String fname = resultSet.getString("FirstName");
             String lname = resultSet.getString("LastName");
             String[] dateParts = resultSet.getString("Date").split("-");
-            LocalDate date = LocalDate.of(Integer.parseInt( dateParts[0]), Integer.parseInt(dateParts[1]), Integer.parseInt(dateParts[1]));
+            LocalDate date = LocalDate.of(Integer.parseInt( dateParts[0]), Integer.parseInt(dateParts[1]), Integer.parseInt(dateParts[2]));
             searchResults.add(new Client(fname,lname, pAddress, savingsAccount, checkingAccount, date));
         }
         catch (Exception ex)
@@ -215,7 +215,7 @@ public class Model {
                 String receiver = resultSet.getString("Receiver");
                 double amount  =resultSet.getDouble("Amount");
                 String[] dateParts = resultSet.getString("Date").split("-");
-                LocalDate date = LocalDate.of(Integer.parseInt( dateParts[0]), Integer.parseInt(dateParts[1]), Integer.parseInt(dateParts[1]));
+                LocalDate date = LocalDate.of(Integer.parseInt( dateParts[0]), Integer.parseInt(dateParts[1]), Integer.parseInt(dateParts[2]));
                 String message = resultSet.getString("Message");
                 transactions.add(new Transaction(sender, receiver, amount, date, message));
             }

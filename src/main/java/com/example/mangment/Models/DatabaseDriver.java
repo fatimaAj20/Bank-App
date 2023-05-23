@@ -168,6 +168,25 @@ public class DatabaseDriver {
         return resultSet;
     }
 
+    public void deleteClient(String pAddress)
+    {
+        Statement statement;
+        try{
+            statement = this.connection.createStatement();
+            statement.executeUpdate("DELETE FROM Clients WHERE PayeeAddress='"+pAddress+"';");
+
+            statement = this.connection.createStatement();
+            statement.executeUpdate("DELETE FROM SavingsAccounts WHERE Owner='"+pAddress+"';");
+
+            statement = this.connection.createStatement();
+            statement.executeUpdate("DELETE FROM CheckingAccounts WHERE Owner='"+pAddress+"';");
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
     public void depositSavings(String payeeAddress, double amount)
     {
         Statement statement;
@@ -256,11 +275,6 @@ public class DatabaseDriver {
         try{
             statement = this.connection.createStatement();
             statement.executeUpdate("INSERT INTO "+ " Transactions (Sender, Receiver, Amount, Date, Message) Values ('"+sender+"', '"+receiver+"', '"+amount+"', '"+LocalDate.now().toString()+"', '"+message+"');");
-            Model.getInstance().getAllTransactions().removeAll();
-            Model.getInstance().setAllTransactions();
-            Model.getInstance().getLatestTransactions().removeAll();
-            Model.getInstance().setLatestTransactions();
-
         }
         catch(Exception ex)
         {
