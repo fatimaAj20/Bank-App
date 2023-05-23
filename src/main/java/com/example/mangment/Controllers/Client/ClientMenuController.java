@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.awt.Desktop;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -57,8 +56,6 @@ public class ClientMenuController implements Initializable {
                 && (desktop = Desktop.getDesktop()).isSupported(Desktop.Action.MAIL)) {
             URI mailto = new URI("mailto:GuiProjectAdmins@lu.edu.lb?subject=Gui%20Project%20Error");
             desktop.mail(mailto);
-        } else {
-            throw new RuntimeException("desktop doesn't support mailto");
         }
         } catch (Exception e) {
             throw new RuntimeException(e);
