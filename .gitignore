@@ -1,0 +1,86 @@
+# Ignore build output directories
+/build/
+/out/
+/target/
+
+# Ignore IntelliJ IDEA project files
+/.idea/
+/*.iml
+
+# Ignore NetBeans project files
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/nbactions.xml
+/nb-configuration.xml
+
+# Ignore Eclipse project files
+/.classpath
+/.project
+/.settings/
+
+# Ignore VS Code project files
+/.vscode/
+
+# Ignore Gradle files
+.gradle/
+/build/
+
+# Ignore Maven target directory
+/target/
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore operating system files
+.DS_Store
+Thumbs.db
+
+# Ignore Java compiled files
+*.class
+
+# Ignore package files
+*.jar
+*.war
+*.ear
+
+# Ignore IDE-specific files
+*.swp
+*~
+.idea/
+.vscode/
+.classpath
+.project
+.settings/
+nbproject/
+
+# Ignore JavaFX specific files
+lib/
+node_modules/
+
+# Ignore test results
+/test-output/
+
+# Ignore other files
+*.bak
+*.orig
+*.rej
+*.swo
+*.old
+*.sublime-project
+*.sublime-workspace
+*.tmproj
+
+# Ignore build tools files
+/gradle/
+/build/
+/target/
+/.gradle/
+/mvnw
+/mvnw.cmd
