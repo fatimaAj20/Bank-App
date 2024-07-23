@@ -2,8 +2,6 @@ package com.example.mangment.Models;
 
 import javafx.beans.property.*;
 
-import java.time.LocalDate;
-
 public abstract class Account {
     private final StringProperty owner;
     private final StringProperty accountNumber;

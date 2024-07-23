@@ -58,6 +58,7 @@ public class Model {
         return client;
     }
 
+
     public Boolean getAdminLoginSuccessFlag() {
         return adminLoginSuccessFlag;
     }
